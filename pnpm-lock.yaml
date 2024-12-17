@@ -7,12 +7,19 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@type-challenges/utils':
+        specifier: ^0.1.1
+        version: 0.1.1
     devDependencies:
       prettier:
-        specifier: ^3.3.2
+        specifier: ^3.4.2
         version: 3.4.2
 
 packages:
+
+  '@type-challenges/utils@0.1.1':
+    resolution: {integrity: sha512-A7ljYfBM+FLw+NDyuYvGBJiCEV9c0lPWEAdzfOAkb3JFqfLl0Iv/WhWMMARHiRKlmmiD1g8gz/507yVvHdQUYA==}
 
   prettier@3.4.2:
     resolution: {integrity: sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==}
@@ -20,5 +27,7 @@ packages:
     hasBin: true
 
 snapshots:
+
+  '@type-challenges/utils@0.1.1': {}
 
   prettier@3.4.2: {}
