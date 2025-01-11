@@ -32,8 +32,8 @@
 /* _____________ 你的代码 _____________ */
 /*
 笔记:
-  关键字 in: 起到迭代作用，将 K 类型中的成员逐一取出
-  关键字 keyof: 生成类型 T 中所有键的联合类型
+  1. 关键字 in: 起到迭代作用，将 K 类型中的成员逐一取出
+  2. 关键字 keyof: 生成类型 T 中所有键的联合类型
 */
 type MyPick<T extends object, K extends keyof T> = {
   [key in K]: T[key]

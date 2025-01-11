@@ -34,9 +34,9 @@
 /* _____________ 你的代码 _____________ */
 /*
 笔记:
-  不是不能使用 readonly 吗 :(
-  不过 readonly 的实现竟然就是 readonly
-  起初还以为是将 key 的类型强制设置为其 value 值的常量
+  1. 不是不能使用 readonly 吗 :(
+  2. 不过 readonly 的实现竟然就是 readonly
+  3. 起初还以为是将 key 的类型强制设置为其 value 值的常量
 */
 type MyReadonly<T extends object> = {
   readonly [key in keyof T]: T[key]
