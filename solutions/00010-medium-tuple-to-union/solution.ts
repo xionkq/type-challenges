@@ -22,8 +22,13 @@
 /*
 笔记:
   1. 递归取出元组所有类型值，将其作为联合类型返回
+  补. 更简单的办法是直接通过类型推断，取出元组类型。。。
+  再补. 或是直接取出所有 key 为 number 的值，在元组中这意味着取出所有元素
 */
-type TupleToUnion<T extends any[]> = T extends [infer F, ...infer R] ? TupleToUnion<R> | F : never
+
+// type TupleToUnion<T extends any[]> = T extends [infer F, ...infer R] ? TupleToUnion<R> | F : never
+// type TupleToUnion<T extends any[]> = T extends Array<infer R> ? R : never
+type TupleToUnion<T extends any[]> = T[number]
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
