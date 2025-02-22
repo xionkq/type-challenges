@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tab-border: 2px;
+  --tab-radius: 12px;
+}
+
+body {
+  color: rgb(0, 0, 0);
+}
+
+html::-webkit-scrollbar {
+  width: 8px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #b0b0b0;
+  border-radius: 4px;
+}
+
+@layer components {
+  .tab {
+    @apply text-lg font-bold h-12;
+  }
+
+  .table :where(thead, tfoot) {
+    @apply text-lg text-black;
+  }
+}
