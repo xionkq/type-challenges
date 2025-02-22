@@ -1,3 +1,4 @@
 {
+  "title": "对象属性只读（递归）",
   "label": ["readonly", "object-keys", "deep"]
 }

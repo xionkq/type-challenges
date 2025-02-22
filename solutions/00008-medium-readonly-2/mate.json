@@ -1,3 +1,4 @@
 {
+  "title": "对象部分属性只读",
   "label": ["readonly", "object-keys"]
 }

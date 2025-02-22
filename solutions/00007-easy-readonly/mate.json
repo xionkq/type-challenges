@@ -1,3 +1,4 @@
 {
+  "title": "对象属性只读",
   "label": ["built-in", "readonly", "object-keys"]
 }
