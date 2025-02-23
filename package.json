@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "pnpm -C website dev",
-    "build": "pnpm -C website build"
+    "build": "pnpm -C website build",
+    "random": "npx tsc --project tsconfig.random.json"
   },
   "author": "",
   "license": "ISC",
