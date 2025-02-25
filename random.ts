@@ -1,3 +1,6 @@
+const path = require('node:path')
+const fs = require('fs')
+
 type TypeChallengesContent = {
   payload: {
     tree: {
@@ -22,10 +25,25 @@ async function getAllProblems() {
   })
   const blob = await response.blob()
   const content = JSON.parse(await blob.text()) as TypeChallengesContent
-  const problemList = content.payload.tree.items.map(item => item.name)
-  const randomIndex = Math.floor(Math.random() * problemList.length)
-  console.log(problemList[randomIndex])
-  return problemList[randomIndex]
+  return content.payload.tree.items.map(item => item.name)
 }
 
-getAllProblems()
+function getAllSolvedProblems() {
+  const solvedProblemsDir = path.join(process.cwd(), './solutions')
+  return fs.readdirSync(solvedProblemsDir)
+}
+
+async function generateRandomProblem() {
+  const all = await getAllProblems()
+  const solved = getAllSolvedProblems()
+  let randomProblem = ''
+
+  while (!randomProblem || solved.includes(randomProblem)) {
+    const randomIndex = Math.floor(Math.random() * all.length)
+    randomProblem = all[randomIndex]
+  }
+  console.log(randomProblem)
+  return randomProblem
+}
+
+generateRandomProblem()

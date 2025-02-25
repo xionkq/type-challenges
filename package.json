@@ -5,13 +5,15 @@
   "scripts": {
     "dev": "pnpm -C website dev",
     "build": "pnpm -C website build",
-    "random": "npx tsc --project tsconfig.random.json"
+    "random": "npx tsc --project tsconfig.random.json && node random.js",
+    "random:run": "node random.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "prettier": "^3.4.2",
-    "@type-challenges/utils": "^0.1.1"
+    "@type-challenges/utils": "^0.1.1",
+    "@types/node": "^20.17.19"
   },
   "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }
