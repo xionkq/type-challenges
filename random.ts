@@ -1,5 +1,15 @@
 const path = require('node:path')
 const fs = require('fs')
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+enum InputEnum {
+  YES = 'Y',
+  NO = 'N',
+  EXIT = 'E',
+}
 
 type TypeChallengesContent = {
   payload: {
@@ -14,6 +24,14 @@ type TypeChallengesContent = {
 }
 
 const TYPE_CHALLENGES_QUESTION_URL = 'https://github.com/type-challenges/type-challenges/tree/main/questions?noancestors=1'
+
+function getInput(prompt: string) {
+  return new Promise<string>((resolve) => {
+    readline.question(prompt, (input: string) => {
+      resolve(input)
+    })
+  })
+}
 
 async function getAllProblems() {
   const response = await fetch(TYPE_CHALLENGES_QUESTION_URL, {
@@ -41,6 +59,9 @@ async function generateRandomProblem() {
   while (!randomProblem || solved.includes(randomProblem)) {
     const randomIndex = Math.floor(Math.random() * all.length)
     randomProblem = all[randomIndex]
+    const input = await getInput('是否生成题目' + randomProblem + '? (Y生成 N再来一次 E退出)：')
+    if (input === InputEnum.NO) randomProblem = ''
+    if (input === InputEnum.EXIT) return
   }
 
   const dirPath = path.join(__dirname, 'solutions', randomProblem)
