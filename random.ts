@@ -25,9 +25,9 @@ type TypeChallengesContent = {
 
 const TYPE_CHALLENGES_QUESTION_URL = 'https://github.com/type-challenges/type-challenges/tree/main/questions?noancestors=1'
 
-function getInput(prompt: string) {
+function getInput(question: string) {
   return new Promise<string>((resolve) => {
-    readline.question(prompt, (input: string) => {
+    readline.question(question, (input: string) => {
       resolve(input)
     })
   })
@@ -61,9 +61,9 @@ async function generateRandomProblem() {
     randomProblem = all[randomIndex]
     const input = await getInput('是否生成题目' + randomProblem + '? (Y生成 N再来一次 E退出)：')
     if (input === InputEnum.NO) randomProblem = ''
-    if (input === InputEnum.EXIT) return
+    if (input === InputEnum.EXIT) return readline.close()
   }
-
+  readline.close()
   const dirPath = path.join(__dirname, 'solutions', randomProblem)
   try {
     // 新建目录
@@ -77,7 +77,6 @@ async function generateRandomProblem() {
   } catch (err) {
     console.error(`创建目录时出错: ${err}`)
   }
-  console.log(randomProblem)
   return randomProblem
 }
 
