@@ -59,10 +59,7 @@ type DeepReadonly<T> = T extends Function ? T : { readonly [k in keyof T]: DeepR
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
-type cases = [
-  Expect<Equal<DeepReadonly<X1>, Expected1>>,
-  Expect<Equal<DeepReadonly<X2>, Expected2>>,
-]
+type cases = [Expect<Equal<DeepReadonly<X1>, Expected1>>, Expect<Equal<DeepReadonly<X2>, Expected2>>]
 
 type X1 = {
   a: () => 22

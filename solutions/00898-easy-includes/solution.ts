@@ -24,7 +24,11 @@
   3. ts 类型中似乎没有判等操作（===），只能 extends，这样对比其实并不规范，此时需要借助 type-challenges 中的 Equal 类型
   （这种题解太难想到了吧）
 */
-type Includes<T extends readonly any[], U> = T extends [infer F, ...infer R] ? (Equal<U, F> extends true ? true : Includes<R, U>) : false
+type Includes<T extends readonly any[], U> = T extends [infer F, ...infer R]
+  ? Equal<U, F> extends true
+    ? true
+    : Includes<R, U>
+  : false
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

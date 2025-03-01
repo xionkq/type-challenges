@@ -22,13 +22,13 @@
   1. 牛逼，type 里还能用模板字符串，通过匹配特定的字符串规则，推断特定的类型
   2. 感觉适用面应该很窄
 */
-type ParseUrlParams<T> = T extends `${string}:${infer A}` ?
-  A extends `${infer B}/${infer C}` ?
-    B | ParseUrlParams<C> :
-    A :
-  never
+type ParseUrlParams<T> = T extends `${string}:${infer A}`
+  ? A extends `${infer B}/${infer C}`
+    ? B | ParseUrlParams<C>
+    : A
+  : never
 
-  /* _____________ Test Cases _____________ */
+/* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [

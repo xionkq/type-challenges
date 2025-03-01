@@ -11,6 +11,12 @@ enum InputEnum {
   EXIT = 'E',
 }
 
+const META_DATA = '' +
+  '{\n' +
+  '  "title": "name",\n' +
+  '  "label": ["any"]\n' +
+  '}\n'
+
 type TypeChallengesContent = {
   payload: {
     tree: {
@@ -71,7 +77,7 @@ async function generateRandomProblem() {
     const fileAPath = path.join(dirPath, 'solution.ts')
     const fileBPath = path.join(dirPath, 'meta.json')
     fs.writeFileSync(fileAPath, '')
-    fs.writeFileSync(fileBPath, '')
+    fs.writeFileSync(fileBPath, META_DATA)
 
     console.log(`目录已成功创建: ${dirPath}`)
   } catch (err) {

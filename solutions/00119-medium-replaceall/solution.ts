@@ -22,8 +22,11 @@
   1. 没想到模板字符串还能自动匹配，学到了
   2. 递归匹配目标字符串，需要注意的是每次递归只匹配最右侧字符串，避免重复匹配
 */
-type ReplaceAll<S extends string, From extends string, To extends string> =
-  From extends '' ? S : S extends `${infer L}${From}${infer R}` ? `${L}${To}${ReplaceAll<`${R}`, From, To>}` : S
+type ReplaceAll<S extends string, From extends string, To extends string> = From extends ''
+  ? S
+  : S extends `${infer L}${From}${infer R}`
+    ? `${L}${To}${ReplaceAll<`${R}`, From, To>}`
+    : S
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

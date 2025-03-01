@@ -6,7 +6,8 @@
     "dev": "pnpm -C website dev",
     "build": "pnpm -C website build",
     "random": "npx tsc --project tsconfig.random.json && node random.js",
-    "random:run": "node random.js"
+    "random:run": "node random.js",
+    "prettier solutions": "prettier --write --ignore-unknown solutions/*/*.ts"
   },
   "author": "",
   "license": "ISC",
