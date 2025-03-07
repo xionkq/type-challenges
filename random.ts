@@ -65,6 +65,10 @@ async function generateRandomProblem() {
   while (!randomProblem || solved.includes(randomProblem)) {
     const randomIndex = Math.floor(Math.random() * all.length)
     randomProblem = all[randomIndex]
+    // 确保输出的题目一定是不重复的
+    if (!randomProblem || solved.includes(randomProblem)) {
+      continue
+    }
     const input = await getInput('是否生成题目' + randomProblem + '? (Y生成 N再来一次 E退出)：')
     if (input === InputEnum.NO) randomProblem = ''
     if (input === InputEnum.EXIT) return readline.close()
