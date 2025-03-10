@@ -54,11 +54,7 @@ import type { Alike, Expect } from '@type-challenges/utils'
 
 declare const a: Chainable
 
-const result1 = a
-  .option('foo', 123)
-  .option('bar', { value: 'Hello World' })
-  .option('name', 'type-challenges')
-  .get()
+const result1 = a.option('foo', 123).option('bar', { value: 'Hello World' }).option('name', 'type-challenges').get()
 
 const result2 = a
   .option('name', 'another name')

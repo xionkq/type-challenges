@@ -58,11 +58,16 @@ type A = Merge<Foo, Bar>
 let a: A
 
 type cases = [
-  Expect<Equal<Merge<Foo, Bar>, {
-    a: number
-    b: number
-    c: boolean
-  }>>,
+  Expect<
+    Equal<
+      Merge<Foo, Bar>,
+      {
+        a: number
+        b: number
+        c: boolean
+      }
+    >
+  >,
 ]
 
 /* _____________ 下一步 _____________ */
