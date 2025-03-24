@@ -39,17 +39,25 @@ function getInput(question: string) {
   })
 }
 
-async function getAllProblems() {
-  const response = await fetch(TYPE_CHALLENGES_QUESTION_URL, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-  })
-  const blob = await response.blob()
-  const content = JSON.parse(await blob.text()) as TypeChallengesContent
-  return content.payload.tree.items.map(item => item.name)
+async function getAllProblems(loop = 5) {
+  try {
+    const response = await fetch(TYPE_CHALLENGES_QUESTION_URL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    })
+    const blob = await response.blob()
+    const content = JSON.parse(await blob.text()) as TypeChallengesContent
+    return content.payload.tree.items.map(item => item.name)
+  } catch (e) {
+    if (loop === 0) {
+      throw e
+    }
+    console.log('请求超时，重试中。剩余重试次数：' + loop)
+    return getAllProblems(loop - 1)
+  }
 }
 
 function getAllSolvedProblems() {
