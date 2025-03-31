@@ -39,7 +39,7 @@ function getInput(question: string) {
   })
 }
 
-async function getAllProblems(loop = 0) {
+async function getAllProblems(loop = 5) {
   try {
     const response = await fetch(TYPE_CHALLENGES_QUESTION_URL, {
       method: 'GET',
@@ -53,7 +53,6 @@ async function getAllProblems(loop = 0) {
     return content.payload.tree.items.map(item => item.name)
   } catch (e) {
     if (loop === 0) {
-      // TODO: 为啥不会走这个
       throw `错误：${e}`
     }
     console.log('请求超时，重试中。剩余重试次数：' + loop)
