@@ -78,8 +78,9 @@ async function generateRandomProblem() {
       continue
     }
     const input = await getInput('是否生成题目' + randomProblem + '? (Y生成 N再来一次 E退出)：')
-    if (input === InputEnum.NO) randomProblem = ''
-    if (input === InputEnum.EXIT) return readline.close()
+    if (input === InputEnum.YES) break
+    else if (input === InputEnum.EXIT) return readline.close()
+    else randomProblem = ''
   }
   readline.close()
   const dirPath = path.join(__dirname, 'solutions', randomProblem)
