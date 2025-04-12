@@ -34,7 +34,7 @@
 /*
 笔记:
   1. 主要问题在于我拿不到参数的文字类型，只能拿到更宽泛的类型 string
-  2. 通过声明参数类型为 readonly any[]，而不是 any 可以解决上述问题
+  2. 通过声明参数类型为 readonly any[]，而不是 any[] 可以解决上述问题（编辑：与 readonly 无关，而是需要将 any[] 改为约束更紧的 string[]）
   3. 当返回值是一个带泛型的函数类型时，请将其泛型声明到返回值函数上，而不是本体函数上
 */
 type Join<D extends string, P, IsF = false> =
@@ -43,7 +43,7 @@ type Join<D extends string, P, IsF = false> =
       : `${D}${F}${Join<D, R>}`
     : ''
 
-declare function join<D extends string>(delimiter: D): <P extends readonly string[]>(...parts: P) => Join<D, P, true>
+declare function join<D extends string>(delimiter: D): <P extends string[]>(...parts: P) => Join<D, P, true>
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
