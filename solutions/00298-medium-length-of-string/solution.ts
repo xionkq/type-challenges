@@ -17,10 +17,9 @@
   2. 对于字符串和数组，length 属性返回一个 number 的类型
   3. 对于定长的元组，length 属性返回其实际长度值
 */
-type LengthOfString<S extends string, A extends any[] = []> =
-  S extends `${infer F}${infer R}`
-    ? LengthOfString<R, [F, ...A]>
-    : A['length']
+type LengthOfString<S extends string, A extends any[] = []> = S extends `${infer F}${infer R}`
+  ? LengthOfString<R, [F, ...A]>
+  : A['length']
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

@@ -26,7 +26,33 @@
   1. 好吧竟然有工具类型 Capitalize 用于将字符串的首字母大写
   2. 判断一个字符是否为字母时，可以使用 Lowercase<T> extends Uppercase<T>
 */
-type LowercaseLetter = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
+type LowercaseLetter =
+  | 'a'
+  | 'b'
+  | 'c'
+  | 'd'
+  | 'e'
+  | 'f'
+  | 'g'
+  | 'h'
+  | 'i'
+  | 'j'
+  | 'k'
+  | 'l'
+  | 'm'
+  | 'n'
+  | 'o'
+  | 'p'
+  | 'q'
+  | 'r'
+  | 's'
+  | 't'
+  | 'u'
+  | 'v'
+  | 'w'
+  | 'x'
+  | 'y'
+  | 'z'
 type Letter = LowercaseLetter | Uppercase<LowercaseLetter>
 
 type MyCapitalize<Str extends string, U = false> = Str extends `${infer F}${infer R}`

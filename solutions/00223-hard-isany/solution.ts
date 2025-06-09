@@ -20,7 +20,7 @@
   3. 使用交集操作 & 时，结果应该缩小到两集合中小的那一个。但 any 和任何类型的交集都是 any
 */
 type IsAny<T> = boolean extends (T extends never ? true : false) ? true : false
-type IsAny1<T> = 0 extends (1 & T) ? true : false
+type IsAny1<T> = 0 extends 1 & T ? true : false
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

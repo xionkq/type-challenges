@@ -43,22 +43,17 @@
   1. 这就是困难题吗，我死了
   2. 参考：https://github.com/type-challenges/type-challenges/issues/10191
 */
-type UnionToIntersectionFn<U> = (
-  U extends unknown ? (k: () => U) => void : never
-  ) extends (k: infer I) => void ? I : never;
+type UnionToIntersectionFn<U> = (U extends unknown ? (k: () => U) => void : never) extends (k: infer I) => void
+  ? I
+  : never
 
-type GetUnionLast<U> = UnionToIntersectionFn<U> extends () => infer I
-  ? I : never;
+type GetUnionLast<U> = UnionToIntersectionFn<U> extends () => infer I ? I : never
 
-type Prepend<Tuple extends unknown[], First> = [First, ...Tuple];
+type Prepend<Tuple extends unknown[], First> = [First, ...Tuple]
 
-type UnionToTuple<
-  Union,
-  T extends unknown[] = [],
-  Last = GetUnionLast<Union>
-> = [Union] extends [never]
+type UnionToTuple<Union, T extends unknown[] = [], Last = GetUnionLast<Union>> = [Union] extends [never]
   ? T
-  : UnionToTuple<Exclude<Union, Last>, Prepend<T, Last>>;
+  : UnionToTuple<Exclude<Union, Last>, Prepend<T, Last>>
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
@@ -76,7 +71,12 @@ type cases = [
   Expect<Equal<ExtractValuesOfTuple<UnionToTuple<'d' | 'f' | 1 | never>>, 'f' | 'd' | 1>>,
   Expect<Equal<ExtractValuesOfTuple<UnionToTuple<[{ a: 1 }] | 1>>, [{ a: 1 }] | 1>>,
   Expect<Equal<ExtractValuesOfTuple<UnionToTuple<never>>, never>>,
-  Expect<Equal<ExtractValuesOfTuple<UnionToTuple<'a' | 'b' | 'c' | 1 | 2 | 'd' | 'e' | 'f' | 'g'>>, 'f' | 'e' | 1 | 2 | 'g' | 'c' | 'd' | 'a' | 'b'>>,
+  Expect<
+    Equal<
+      ExtractValuesOfTuple<UnionToTuple<'a' | 'b' | 'c' | 1 | 2 | 'd' | 'e' | 'f' | 'g'>>,
+      'f' | 'e' | 1 | 2 | 'g' | 'c' | 'd' | 'a' | 'b'
+    >
+  >,
 ]
 
 /* _____________ Further Steps _____________ */

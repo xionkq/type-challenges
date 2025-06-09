@@ -41,19 +41,17 @@
   3. 另，需要手动实现合并对象属性的工具类型（联合类型操作符 & 不管用）
 */
 type Merge<T, U> = {
-  readonly [K in keyof T | keyof U]: K extends keyof U
-    ? U[K]
-    : K extends keyof T
-      ? T[K]
-      : never
+  readonly [K in keyof T | keyof U]: K extends keyof U ? U[K] : K extends keyof T ? T[K] : never
 }
 
-type Enum<T extends readonly any[], N extends boolean = false, L extends any[] = []> =
-  T extends readonly [infer F, ...infer R] ?
-    F extends string ?
-      Merge<{ [K in Capitalize<F>]: N extends true ? L['length'] : F }, Enum<R, N, [...L, 'any']>>
-      : never
-    : {}
+type Enum<T extends readonly any[], N extends boolean = false, L extends any[] = []> = T extends readonly [
+  infer F,
+  ...infer R,
+]
+  ? F extends string
+    ? Merge<{ [K in Capitalize<F>]: N extends true ? L['length'] : F }, Enum<R, N, [...L, 'any']>>
+    : never
+  : {}
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
@@ -66,52 +64,60 @@ let a: A
 
 type cases = [
   Expect<Equal<Enum<[]>, {}>>,
-  Expect<Equal<
-    Enum<typeof OperatingSystem>,
-    {
-      readonly MacOS: 'macOS'
-      readonly Windows: 'Windows'
-      readonly Linux: 'Linux'
-    }
-  >>,
-  Expect<Equal<
-    Enum<typeof OperatingSystem, true>,
-    {
-      readonly MacOS: 0
-      readonly Windows: 1
-      readonly Linux: 2
-    }
-  >>,
-  Expect<Equal<
-    Enum<typeof Command>,
-    {
-      readonly Echo: 'echo'
-      readonly Grep: 'grep'
-      readonly Sed: 'sed'
-      readonly Awk: 'awk'
-      readonly Cut: 'cut'
-      readonly Uniq: 'uniq'
-      readonly Head: 'head'
-      readonly Tail: 'tail'
-      readonly Xargs: 'xargs'
-      readonly Shift: 'shift'
-    }
-  >>,
-  Expect<Equal<
-    Enum<typeof Command, true>,
-    {
-      readonly Echo: 0
-      readonly Grep: 1
-      readonly Sed: 2
-      readonly Awk: 3
-      readonly Cut: 4
-      readonly Uniq: 5
-      readonly Head: 6
-      readonly Tail: 7
-      readonly Xargs: 8
-      readonly Shift: 9
-    }
-  >>,
+  Expect<
+    Equal<
+      Enum<typeof OperatingSystem>,
+      {
+        readonly MacOS: 'macOS'
+        readonly Windows: 'Windows'
+        readonly Linux: 'Linux'
+      }
+    >
+  >,
+  Expect<
+    Equal<
+      Enum<typeof OperatingSystem, true>,
+      {
+        readonly MacOS: 0
+        readonly Windows: 1
+        readonly Linux: 2
+      }
+    >
+  >,
+  Expect<
+    Equal<
+      Enum<typeof Command>,
+      {
+        readonly Echo: 'echo'
+        readonly Grep: 'grep'
+        readonly Sed: 'sed'
+        readonly Awk: 'awk'
+        readonly Cut: 'cut'
+        readonly Uniq: 'uniq'
+        readonly Head: 'head'
+        readonly Tail: 'tail'
+        readonly Xargs: 'xargs'
+        readonly Shift: 'shift'
+      }
+    >
+  >,
+  Expect<
+    Equal<
+      Enum<typeof Command, true>,
+      {
+        readonly Echo: 0
+        readonly Grep: 1
+        readonly Sed: 2
+        readonly Awk: 3
+        readonly Cut: 4
+        readonly Uniq: 5
+        readonly Head: 6
+        readonly Tail: 7
+        readonly Xargs: 8
+        readonly Shift: 9
+      }
+    >
+  >,
 ]
 
 /* _____________ 下一步 _____________ */

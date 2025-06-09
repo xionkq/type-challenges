@@ -28,7 +28,9 @@
   2. 其中 [T] 代表长度为 1 的数组，[...T] 代表任意长度的数组，readonly [...T] 代表任意长度的只读数组即元组
   3. 语法 { P in keyof T: do something about P } 类似于 js 中的 Array.map，它会对对象中每个类型执行操作，但不会改变原始类型
 */
-declare function PromiseAll<T extends any[]>(values: readonly [...T]): Promise<{
+declare function PromiseAll<T extends any[]>(
+  values: readonly [...T]
+): Promise<{
   [P in keyof T]: T[P] extends Promise<infer R> | infer R ? R : never
 }>
 

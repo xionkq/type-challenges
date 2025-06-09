@@ -25,7 +25,7 @@
   2. 而对于单一类型，'a' extends 'a' 为 true
   3. 虽说还是不知道为什么外层需要添加一个反转
 */
-type IsUnion<T, Copy = T> = (T extends T ? Copy extends T ? true : unknown : never) extends true ? false : true
+type IsUnion<T, Copy = T> = (T extends T ? (Copy extends T ? true : unknown) : never) extends true ? false : true
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

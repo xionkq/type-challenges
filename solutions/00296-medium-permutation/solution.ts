@@ -16,20 +16,25 @@
 
 /* _____________ 你的代码 _____________ */
 // 你告诉我这是中等题:)？？
-type Permutation<T, K=T> =
-  [T] extends [never]
-    ? []
-    : K extends K
-      ? [K, ...Permutation<Exclude<T, K>>]
-      : never
+type Permutation<T, K = T> = [T] extends [never] ? [] : K extends K ? [K, ...Permutation<Exclude<T, K>>] : never
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
   Expect<Equal<Permutation<'A'>, ['A']>>,
-  Expect<Equal<Permutation<'A' | 'B' | 'C'>, ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']>>,
-  Expect<Equal<Permutation<'B' | 'A' | 'C'>, ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']>>,
+  Expect<
+    Equal<
+      Permutation<'A' | 'B' | 'C'>,
+      ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
+    >
+  >,
+  Expect<
+    Equal<
+      Permutation<'B' | 'A' | 'C'>,
+      ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
+    >
+  >,
   Expect<Equal<Permutation<boolean>, [false, true] | [true, false]>>,
   Expect<Equal<Permutation<never>, []>>,
 ]

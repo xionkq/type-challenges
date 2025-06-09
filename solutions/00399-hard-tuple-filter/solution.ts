@@ -21,17 +21,16 @@
   1. T extends [infer E, ...infer R]，即使 T 为单元素数组，条件也会成立，此时 R 为空数组
   2. never extends never 似乎会出问题，gpt 说是因为 never 是特殊的联合类型，因而在条件类型中会出问题
 */
-type FilterOut<T extends any[], F> =
-  T extends [infer E, ...infer R]
-    ? [E] extends [F]
-      ? FilterOut<R, F>
-      : [E, ...FilterOut<R, F>]
-    :  []
+type FilterOut<T extends any[], F> = T extends [infer E, ...infer R]
+  ? [E] extends [F]
+    ? FilterOut<R, F>
+    : [E, ...FilterOut<R, F>]
+  : []
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
-type A = [1] extends [infer F, ...infer R] ? R: false
+type A = [1] extends [infer F, ...infer R] ? R : false
 let a: A
 
 type cases = [

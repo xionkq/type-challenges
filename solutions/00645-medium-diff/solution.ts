@@ -34,11 +34,13 @@
 type Merge<T> = {
   [K in keyof T]: T[K]
 }
-type Diff<F extends Record<string, any>, S extends Record<string, any>> = Merge<{
-  [K in Exclude<keyof F, keyof S>]: F[K]
-} & {
-  [K in Exclude<keyof S, keyof F>]: S[K]
-}>
+type Diff<F extends Record<string, any>, S extends Record<string, any>> = Merge<
+  {
+    [K in Exclude<keyof F, keyof S>]: F[K]
+  } & {
+    [K in Exclude<keyof S, keyof F>]: S[K]
+  }
+>
 // type Diff<F extends Record<string, any>, S extends Record<string, any>> = Exclude<keyof F, keyof S>
 
 /* _____________ 测试用例 _____________ */
@@ -63,8 +65,8 @@ type Coo = {
 type cases = [
   Expect<Equal<Diff<Foo, Bar>, { gender: number }>>,
   Expect<Equal<Diff<Bar, Foo>, { gender: number }>>,
-  Expect<Equal<Diff<Foo, Coo>, { age: string, gender: number }>>,
-  Expect<Equal<Diff<Coo, Foo>, { age: string, gender: number }>>,
+  Expect<Equal<Diff<Foo, Coo>, { age: string; gender: number }>>,
+  Expect<Equal<Diff<Coo, Foo>, { age: string; gender: number }>>,
 ]
 
 /* _____________ 下一步 _____________ */

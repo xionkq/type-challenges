@@ -37,11 +37,11 @@
   2. 通过声明参数类型为 readonly any[]，而不是 any[] 可以解决上述问题（编辑：与 readonly 无关，而是需要将 any[] 改为约束更紧的 string[]）
   3. 当返回值是一个带泛型的函数类型时，请将其泛型声明到返回值函数上，而不是本体函数上
 */
-type Join<D extends string, P, IsF = false> =
-  P extends [infer F extends string, ...infer R]
-    ? IsF extends true ? `${F}${Join<D, R>}`
-      : `${D}${F}${Join<D, R>}`
-    : ''
+type Join<D extends string, P, IsF = false> = P extends [infer F extends string, ...infer R]
+  ? IsF extends true
+    ? `${F}${Join<D, R>}`
+    : `${D}${F}${Join<D, R>}`
+  : ''
 
 declare function join<D extends string>(delimiter: D): <P extends string[]>(...parts: P) => Join<D, P, true>
 

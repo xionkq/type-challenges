@@ -27,10 +27,7 @@
   3. 使用 Record<string, never> 定义一个空对象类型，它代表键为 string，而值为 never 的对象，但没有任何值的类型是 never，因此代表一个空对象
 */
 type Invalid = 0 | '' | [] | Record<string, never> | false | undefined | null
-type AnyOf<T extends readonly any[]> =
-  T extends [infer F, ...infer R]
-    ? F extends Invalid ? AnyOf<R> : true
-    : false
+type AnyOf<T extends readonly any[]> = T extends [infer F, ...infer R] ? (F extends Invalid ? AnyOf<R> : true) : false
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

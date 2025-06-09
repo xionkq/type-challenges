@@ -22,7 +22,7 @@
   1. 每当一个题看上去像是要遍历或递归联合类型时，题解就一定不会用到递归或遍历，不如叫 ts 的奇技淫巧:(
   2. 此题算是将类型推断为交叉类型的特殊写法
 */
-type UnionToIntersection<U> = (U extends any ? (arg: U) => any : never) extends ((arg: infer I) => void) ? I : never
+type UnionToIntersection<U> = (U extends any ? (arg: U) => any : never) extends (arg: infer I) => void ? I : never
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

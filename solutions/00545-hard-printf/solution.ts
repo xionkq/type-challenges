@@ -24,13 +24,12 @@
 笔记:
   1. 似乎是其他语言中打印输出时的解析语法，不是特别懂用例四
 */
-type Format<T extends string> =
-  T extends `${infer A}%${infer B}${infer Rest}`
-    ? B extends 'd'
-      ? (arg: number) => Format<Rest>
-      : B extends 's'
-        ? (arg: string) => Format<Rest>
-        :  Format<Rest>
+type Format<T extends string> = T extends `${infer A}%${infer B}${infer Rest}`
+  ? B extends 'd'
+    ? (arg: number) => Format<Rest>
+    : B extends 's'
+      ? (arg: string) => Format<Rest>
+      : Format<Rest>
   : string
 
 /* _____________ Test Cases _____________ */

@@ -22,12 +22,11 @@
   1. 写出来了，但是这个递归还是有点糊涂
   2. 需要牢记 Flatten 类型接受一个数组，并返回一个完全扁平化数组，会好理解些
 */
-type Flatten<T extends any[]> =
-  T extends [infer F, ...infer R]
-    ? F extends any[]
-      ? [...Flatten<F>, ...Flatten<R>]
-      : [F, ...Flatten<R>]
-    : T
+type Flatten<T extends any[]> = T extends [infer F, ...infer R]
+  ? F extends any[]
+    ? [...Flatten<F>, ...Flatten<R>]
+    : [F, ...Flatten<R>]
+  : T
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
@@ -40,7 +39,7 @@ type cases = [
   Expect<Equal<Flatten<[1, 2, 3, 4]>, [1, 2, 3, 4]>>,
   Expect<Equal<Flatten<[1, [2]]>, [1, 2]>>,
   Expect<Equal<Flatten<[1, 2, [3, 4], [[[5]]]]>, [1, 2, 3, 4, 5]>>,
-  Expect<Equal<Flatten<[{ foo: 'bar', 2: 10 }, 'foobar']>, [{ foo: 'bar', 2: 10 }, 'foobar']>>,
+  Expect<Equal<Flatten<[{ foo: 'bar'; 2: 10 }, 'foobar']>, [{ foo: 'bar'; 2: 10 }, 'foobar']>>,
 ]
 
 // @ts-expect-error

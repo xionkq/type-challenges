@@ -32,7 +32,7 @@
 type KebabCase<S> = S extends `${infer First}${infer Second}${infer R}`
   ? Second extends Lowercase<Second>
     ? `${Lowercase<First>}${KebabCase<`${Second}${R}`>}`
-    :`${Lowercase<First>}-${KebabCase<`${Lowercase<Second>}${R}`>}`
+    : `${Lowercase<First>}-${KebabCase<`${Lowercase<Second>}${R}`>}`
   : S
 
 /*

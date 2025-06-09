@@ -34,12 +34,17 @@
   1. 分类讨论，太绕了
   2. 小心不要掉进 S extends number 的陷阱，其实只需要判断第一个和最后一个字符就行
 */
-type PercentageParser<A extends string> =
-  A extends `${infer F extends '+' | '-'}${infer R}`
-    ? R extends `${infer S}%` ?
-      [F, S, '%'] : R extends `${infer S}` ? [F, S, ''] : [F, '', '']
-    : A extends `${infer S}%` ?
-      ['', S, '%'] : A extends `${infer S}` ? ['', S, ''] : ['', '', '']
+type PercentageParser<A extends string> = A extends `${infer F extends '+' | '-'}${infer R}`
+  ? R extends `${infer S}%`
+    ? [F, S, '%']
+    : R extends `${infer S}`
+      ? [F, S, '']
+      : [F, '', '']
+  : A extends `${infer S}%`
+    ? ['', S, '%']
+    : A extends `${infer S}`
+      ? ['', S, '']
+      : ['', '', '']
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

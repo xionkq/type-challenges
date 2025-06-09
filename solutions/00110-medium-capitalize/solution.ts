@@ -50,12 +50,11 @@ type LetterEnum = {
   y: 'Y'
   z: 'Z'
 }
-type MyCapitalize<S extends string> =
-  S extends `${infer F}${infer R}`
-    ? F extends keyof LetterEnum
-      ? `${LetterEnum[F]}${R}`
-      : S
+type MyCapitalize<S extends string> = S extends `${infer F}${infer R}`
+  ? F extends keyof LetterEnum
+    ? `${LetterEnum[F]}${R}`
     : S
+  : S
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

@@ -33,19 +33,19 @@
   2. 当函数没有定义泛型参数时，即使使用 typeof 获取参数类型，最终结果也不会根据参数类型变化
   3. 定义泛型之后，使用 typeof 获取参数类型，则结果可以根据参数类型变化
 */
-type CurryingType<T> =
-  T extends (...args: infer P) => infer R
-    ? P extends [infer F, ...infer Rest]
-      ? (a: F) => CurryingType<(...a: Rest) => R>
-      : ReturnType<T>
-    : never
+type CurryingType<T> = T extends (...args: infer P) => infer R
+  ? P extends [infer F, ...infer Rest]
+    ? (a: F) => CurryingType<(...a: Rest) => R>
+    : ReturnType<T>
+  : never
 
-declare function Currying<T>(fn: T):
-  T extends (...args: infer P) => infer R
-    ? P['length'] extends 0
-      ? () => ReturnType<T>
-      : CurryingType<typeof fn>
-    : never
+declare function Currying<T>(
+  fn: T
+): T extends (...args: infer P) => infer R
+  ? P['length'] extends 0
+    ? () => ReturnType<T>
+    : CurryingType<typeof fn>
+  : never
 
 /* _____________ 泛型类型拓宽 _____________ */
 
@@ -68,14 +68,13 @@ const curried3 = Currying(() => true)
 const curried4 = Currying(() => 1)
 
 type cases = [
-  Expect<Equal<
-    typeof curried1,
-    (a: string) => (b: number) => (c: boolean) => true
-  >>,
-  Expect<Equal<
-    typeof curried2,
-    (a: string) => (b: number) => (c: boolean) => (d: boolean) => (e: boolean) => (f: string) => (g: boolean) => true
-  >>,
+  Expect<Equal<typeof curried1, (a: string) => (b: number) => (c: boolean) => true>>,
+  Expect<
+    Equal<
+      typeof curried2,
+      (a: string) => (b: number) => (c: boolean) => (d: boolean) => (e: boolean) => (f: string) => (g: boolean) => true
+    >
+  >,
   Expect<Equal<typeof curried3, () => true>>,
   Expect<Equal<typeof curried4, () => 1>>,
 ]

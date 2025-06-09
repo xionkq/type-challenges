@@ -29,13 +29,13 @@ type RequiredKeys<T extends Record<string, any>> = keyof {
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
-type A = RequiredKeys<{ a: number, b?: string }>
+type A = RequiredKeys<{ a: number; b?: string }>
 let a: A
 
 type cases = [
-  Expect<Equal<RequiredKeys<{ a: number, b?: string }>, 'a'>>,
-  Expect<Equal<RequiredKeys<{ a: undefined, b?: undefined }>, 'a'>>,
-  Expect<Equal<RequiredKeys<{ a: undefined, b?: undefined, c: string, d: null }>, 'a' | 'c' | 'd'>>,
+  Expect<Equal<RequiredKeys<{ a: number; b?: string }>, 'a'>>,
+  Expect<Equal<RequiredKeys<{ a: undefined; b?: undefined }>, 'a'>>,
+  Expect<Equal<RequiredKeys<{ a: undefined; b?: undefined; c: string; d: null }>, 'a' | 'c' | 'd'>>,
   Expect<Equal<RequiredKeys<{}>, never>>,
 ]
 

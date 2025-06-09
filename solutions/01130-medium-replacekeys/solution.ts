@@ -49,7 +49,7 @@
   1. 遍历一次过了
 */
 type ReplaceKeys<U, T, Y> = {
-  [K in keyof U]: K extends T ? K extends keyof Y ? Y[K] : never : U[K]
+  [K in keyof U]: K extends T ? (K extends keyof Y ? Y[K] : never) : U[K]
 }
 
 /* _____________ Test Cases _____________ */
@@ -108,7 +108,7 @@ type ReplacedNodes = ReplacedNodeA | ReplacedNodeB | ReplacedNodeC
 type NodesNoName = NoNameNodeA | NoNameNodeC | NodeB
 
 type cases = [
-  Expect<Equal<ReplaceKeys<Nodes, 'name' | 'flag', { name: number, flag: string }>, ReplacedNodes>>,
+  Expect<Equal<ReplaceKeys<Nodes, 'name' | 'flag', { name: number; flag: string }>, ReplacedNodes>>,
   Expect<Equal<ReplaceKeys<Nodes, 'name', { aa: number }>, NodesNoName>>,
 ]
 

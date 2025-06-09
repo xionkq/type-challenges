@@ -27,12 +27,12 @@ type GetOptional<T> = {
 
 /* _____________ 测试用例 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
-type A = GetOptional<{ foo: number, bar?: string }>
+type A = GetOptional<{ foo: number; bar?: string }>
 let a: A
 
 type cases = [
-  Expect<Equal<GetOptional<{ foo: number, bar?: string }>, { bar?: string }>>,
-  Expect<Equal<GetOptional<{ foo: undefined, bar?: undefined }>, { bar?: undefined }>>,
+  Expect<Equal<GetOptional<{ foo: number; bar?: string }>, { bar?: string }>>,
+  Expect<Equal<GetOptional<{ foo: undefined; bar?: undefined }>, { bar?: undefined }>>,
 ]
 
 /* _____________ 下一步 _____________ */
