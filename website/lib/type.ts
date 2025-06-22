@@ -1,8 +1,10 @@
 export enum Difficulty {
   ALL = 'all',
+  WARM = 'warm',
   EASY = 'easy',
   MEDIUM = 'medium',
   HARD = 'hard',
+  EXTREME = 'extreme',
 }
 
 export interface SolutionMetaData {

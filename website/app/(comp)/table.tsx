@@ -35,31 +35,41 @@ export function TableWithTabs({ solutions }: { solutions: SolutionMetaData[] }) 
   }
 
   let textAll = '所有',
+    textWarm = '热身',
     textEasy = '简单',
     textMedium = '中等',
-    textHard = '困难'
+    textHard = '困难',
+    textExtreme = '地狱'
   switch (difficulty) {
     case Difficulty.ALL:
-      textAll = `所有${currentList.length}`
+      textAll += currentList.length
+      break
+    case Difficulty.WARM:
+      textWarm += currentList.length
       break
     case Difficulty.EASY:
-      textEasy = `简单${currentList.length}`
+      textEasy += currentList.length
       break
     case Difficulty.MEDIUM:
-      textMedium = `中等${currentList.length}`
+      textMedium += currentList.length
       break
     case Difficulty.HARD:
-      textHard = `困难${currentList.length}`
+      textHard += currentList.length
+      break
+    case Difficulty.EXTREME:
+      textExtreme += currentList.length
       break
   }
 
   return (
     <>
-      <div role="tablist" className="tabs tabs-lifted w-[350px] ml-4" onChange={handleTabChange}>
+      <div role="tablist" className="tabs tabs-lifted w-[510px] ml-4" onChange={handleTabChange}>
         <input type="radio" name="tab" className="tab" aria-label={textAll} value={Difficulty.ALL} defaultChecked />
+        <input type="radio" name="tab" className="tab" aria-label={textWarm} value={Difficulty.WARM} />
         <input type="radio" name="tab" className="tab" aria-label={textEasy} value={Difficulty.EASY} />
         <input type="radio" name="tab" className="tab" aria-label={textMedium} value={Difficulty.MEDIUM} />
         <input type="radio" name="tab" className="tab" aria-label={textHard} value={Difficulty.HARD} />
+        <input type="radio" name="tab" className="tab" aria-label={textExtreme} value={Difficulty.EXTREME} />
         <div className="col-start-1 row-start-2"></div>
       </div>
       <div className="bg-base-100 border-base-300 rounded-box p-6 block border-2 mt-[-2px]">
@@ -120,6 +130,9 @@ export function Table({ solutions }: { solutions: SolutionMetaData[] }) {
           {solutions.map((solution) => {
             let tagColor = ''
             switch (solution.difficulty) {
+              case Difficulty.EXTREME:
+                tagColor = 'text-pink-900'
+                break
               case Difficulty.HARD:
                 tagColor = 'text-rose-600'
                 break
@@ -128,6 +141,9 @@ export function Table({ solutions }: { solutions: SolutionMetaData[] }) {
                 break
               case Difficulty.EASY:
                 tagColor = 'text-emerald-500'
+                break
+              case Difficulty.WARM:
+                tagColor = 'text-yellow-300'
                 break
             }
             return (
